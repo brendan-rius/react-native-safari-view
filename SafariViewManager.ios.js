@@ -35,7 +35,15 @@ export default {
   },
 
   dismiss() {
-    NativeSafariViewManager.dismiss();
+    return new Promise((resolve, reject) => {
+      NativeSafariViewManager.dismiss((error) => {
+        if (error) {
+          return reject(error);
+        }
+        
+        resolve(true);
+      });
+    })
   },
 
   isAvailable() {
