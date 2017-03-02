@@ -75,7 +75,7 @@ RCT_EXPORT_METHOD(isAvailable:(RCTResponseSenderBlock)callback)
 
 RCT_EXPORT_METHOD(dismiss:(RCTResponseSenderBlock)callback)
 {
-    [controller dismissViewControllerAnimated:true completion:^{
+    [self.safariView dismissViewControllerAnimated:true completion:^{
         callback(@[[NSNull null], @true]);
     }];
     NSLog(@"[SafariView] SafariView dismissed.");
