@@ -73,9 +73,14 @@ RCT_EXPORT_METHOD(isAvailable:(RCTResponseSenderBlock)callback)
     }
 }
 
-RCT_EXPORT_METHOD(dismiss)
+RCT_EXPORT_METHOD(dismiss:(RCTResponseSenderBlock)callback)
 {
-    [self safariViewControllerDidFinish:self.safariView];
+    [controller dismissViewControllerAnimated:true completion:^{
+        callback(@[[NSNull null], @true]);
+    }];
+    NSLog(@"[SafariView] SafariView dismissed.");
+    
+    [self.bridge.eventDispatcher sendAppEventWithName:@"SafariViewOnDismiss" body:nil];
 }
 
 -(void)safariViewControllerDidFinish:(nonnull SFSafariViewController *)controller
